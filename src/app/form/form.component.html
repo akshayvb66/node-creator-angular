@@ -1,0 +1,31 @@
+<form #form="ngForm" (ngSubmit)="submit(form.value)">
+    <div>
+      <label>id:</label>
+      <input type="text" name="id" ngModel>
+    </div>
+    <div>
+      <label>name:</label>
+      <input type="text" name="name" ngModel>
+    </div>
+    <div class="form-group col-lg-5">
+        <label for="parentNode">Parent Node Name</label>
+        <select class="form-control" id="sel1">
+            <option>Select</option>
+                  <option *ngFor="let book of concepts | async">{{book}}</option>
+        </select>
+      </div>
+          
+  
+    <button type="submit">Submit</button>
+  </form>
+
+  <button type="submit" (click)="getNodes1()">getNodes</button>
+
+  
+  <div class="form-group col-lg-5">
+    <ul>
+              <li *ngFor="let book of concepts | async">{{book}}</li>
+              </ul>
+  </div>
+
+  
