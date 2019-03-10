@@ -11,6 +11,7 @@ export class NodeComponent implements OnInit {
   openConcept: boolean;
   openProperty: boolean;
   value: any;
+  openIntent: boolean;
 
   constructor(private formService:FormService) { }
 
@@ -24,6 +25,10 @@ export class NodeComponent implements OnInit {
   onClickOpenConceptForm(){
     this.openConcept=true;
   } 
+
+  onClickOpenIntentForm(){
+    this.openIntent=true;
+  }
   
   showProprties(){
     this.openProperty=true;
@@ -42,13 +47,15 @@ export class NodeComponent implements OnInit {
     this.fieldArray.splice(index, 1);
 }
 
+
 addLastProperty(){
   this.fieldArray.push(this.newAttribute);
 }
 
+
 createNode(form) {
-  console.log(form.newAttributeProperty);
-  console.log(form.newAttributeProperty);
+  delete form.newAttributeProperty;
+  delete form.newAttributeValue;
   this.value = form; 
   console.log(this.value);
   this.formService.createNode(this.value)
@@ -59,6 +66,18 @@ createNode(form) {
       console.log("Error", error);}
   );
 }
-
+createIntent(form) {
+  delete form.newAttributeProperty;
+  delete form.newAttributeValue;
+  this.value = form; 
+  console.log(this.value);
+  this.formService.createNode(this.value)
+  .subscribe(
+    data => {
+      console.log("POST Request is successful ", data);},
+    error => {
+      console.log("Error", error);}
+  );
+}
 
 }

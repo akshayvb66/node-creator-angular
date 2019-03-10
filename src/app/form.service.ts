@@ -15,7 +15,6 @@ export class FormService {
   createNode(value){
 
     this.url="http://localhost:8080/create";
-    console.log(value);
     return this.http.post(this.url,value);
   }
 

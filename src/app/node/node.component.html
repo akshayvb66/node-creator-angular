@@ -9,7 +9,7 @@
 </div>
 
 <div>
-    <button [hidden]="!openform" (click)="onClickOpenIntentForm"
+    <button [hidden]="!openform" (click)="onClickOpenIntentForm()"
    value="Concept">Intent Node Create</button>
 </div>
 <form [hidden]="!openConcept" #form="ngForm" (ngSubmit)="createNode(form.value)">
@@ -17,18 +17,8 @@
       <label>node name:</label>
       <input type="text" name="name" ngModel>
     </div>
-    <button type="submit" (click)="showProprties()">Submit and add properties</button>
-  <tr *ngFor="let field of fieldArray; let i = index">
-      <td>
-          {{field.property}}<input [(ngModel)]="field.value" class="form-control" type="text" name="{{field.property}}" />
-      </td>
-      <!-- <td>
-          <input [(ngModel)]="field.value" class="form-control" type="text" name="{{field.value}}" />
-      </td> -->
-      <td>
-          <button class="btn btn-default"  type="button" (click)="deleteFieldValue(i)">Delete</button>
-      </td>
-  </tr>
+    <button class="btn btn-default" type="button" (click)="showProprties()">Add properties</button>
+
   <tr [hidden]="!openProperty">
       <td>
           <input class="form-control" type="text" id="newAttributeProperty" [(ngModel)]="newAttribute.property" name="newAttributeProperty" />
@@ -38,7 +28,52 @@
       </td>
       <td>
           <button class="btn btn-default" type="button" (click)="addFieldValue()">Add</button>
-      </td>
+        </td>
   </tr>
-  <button [hidden]="!openProperty" (click)="addLastProperty()" type="submit">Submit</button>
+  <tr *ngFor="let field of fieldArray; let i = index">
+    <td>
+        {{field.property}}<input [(ngModel)]="field.value" class="form-control" type="text" name="{{field.property}}" />
+    </td>
+    <!-- <td>
+        <input [(ngModel)]="field.value" class="form-control" type="text" name="{{field.value}}" />
+    </td> -->
+    <td>
+        <button class="btn btn-default"  type="button" (click)="deleteFieldValue(i)">Delete</button>
+    </td>
+</tr>
+  <button [hidden]="!openProperty" type="submit">Submit</button>
+</form>
+
+
+
+
+<form [hidden]="!openIntent" #form1="ngForm" (ngSubmit)="createIntent(form1.value)">
+    <div>
+      <label>node name:</label>
+      <input type="text" name="name" ngModel>
+    </div>
+    <button class="btn btn-default" type="button" (click)="showProprties()">Add properties</button>
+
+  <tr [hidden]="!openProperty">
+      <td>
+          <input class="form-control" type="text" id="newAttributeProperty" [(ngModel)]="newAttribute.property" name="newAttributeProperty" />
+      </td>
+      <td>
+          <input class="form-control" type="text" id="newAttributeValue" [(ngModel)]="newAttribute.value" name="newAttributeValue" />
+      </td>
+      <td>
+          <button class="btn btn-default" type="button" (click)="addFieldValue()">Add</button>
+        </td>
+  </tr>
+
+  <tr *ngFor="let field of fieldArray; let i = index">
+    <td>
+        {{field.property}}<input [(ngModel)]="field.value" class="form-control" type="text" name="{{field.property}}" />
+    </td>
+    <td>
+        <button class="btn btn-default"  type="button" (click)="deleteFieldValue(i)">Delete</button>
+    </td>
+</tr>
+
+  <button [hidden]="!openProperty" type="submit">Submit</button>
 </form>
