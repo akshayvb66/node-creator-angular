@@ -1,6 +1,10 @@
 <div>
-    <button (click)="onClickOpenForm()" 
+    <button mat-raised-button color="primary" (click)="onClickOpenForm()" 
    value="Register">Add Node</button>
+</div>
+<br>
+<div>
+    <button mat-raised-button color="primary" (click)="onClickgetTerms()">Get All terms</button>
 </div>
 
 <div>
@@ -14,8 +18,10 @@
 </div>
 <form [hidden]="!openConcept" #form="ngForm" (ngSubmit)="createNode(form.value)">
     <div>
+        <mat-form-field>
       <label>node name:</label>
-      <input type="text" name="name" ngModel>
+      <input matInput type="text" name="name" ngModel>
+    </mat-form-field>
     </div>
     <button class="btn btn-default" type="button" (click)="showProprties()">Add properties</button>
 
@@ -77,3 +83,22 @@
 
   <button [hidden]="!openProperty" type="submit">Submit</button>
 </form>
+
+<div [hidden]="!getTerms">
+    <br>
+        <button mat-raised-button (click)="onClickShowKnowledge()">Get knowledge terms</button>
+        <button mat-raised-button (click)="onClickShowSynthesis()">Get Synthesis terms</button>
+        <button mat-raised-button (click)="onClickShowComprehension()">Get Comphrension terms</button>
+        <button mat-raised-button (click)="onClickShowEvaluation()">Get Evaluation terms</button>
+        <button mat-raised-button (click)="onClickShowAnaylsis()">Get Analysis terms</button>
+        <button mat-raised-button (click)="onClickShowApplication()">Get Application terms</button>
+</div>
+
+                <mat-list>
+                  <tr *ngFor="let terms of intents | async">
+                        <td>{{terms}}</td>
+                <td> <button mat-flat-button color="primary" (click)="openDialog(terms,bloomstack)">Add Synonym</button></td>
+                  </tr>
+                </mat-list>
+
+
